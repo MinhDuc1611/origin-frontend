@@ -1,0 +1,60 @@
+<div class="simulation">
+  <p class="simulation-title">
+    Let's plan your <b>saving goal.</b>
+  </p>
+  <form class="simulation-form" #simulationForm="ngForm" (ngSubmit)="onConfirm(simulationForm)">
+    <div class="simulation-form__container">
+      <div class="simulation-form__goal">
+        <img src="assets/svg/house.svg" alt="">
+        <div class="goal-title">
+          <h3>Buy a house</h3>
+          <p>Saving goal</p>
+        </div>
+      </div>
+      <div class="simulation-form__field">
+        <div class="amount-field">
+          <label for="amount">Total amount</label>
+          <div class="dollar-input">
+            <img src="assets/svg/dollar.svg" alt="">
+            <input
+              type="text"
+              name="amount"
+              [ngModel]="amount"
+              (input)="onInput($event)"
+            >
+          </div>         
+        </div>
+        <div class="reach-date-field">
+          <label for="reachDate">Reach goal by</label>
+          <div class="date-selection" tabindex="0" (focus)="onFocusReachDate($event)" (blur)="onBlurReachDate($event)">
+            <button (click)="onPrevMonth()" [disabled]="checkDisabledPrevMonth()" type="button">
+              <img src="assets/svg/arrow-left.svg" alt="prevMonth">
+            </button>
+            <div>
+              <p class="month">{{ getMonthName(reachDate.getMonth()) }}</p>
+              <p class="year">{{ reachDate.getFullYear() }}</p>
+            </div>
+            <button (click)="onNextMonth()" type="button">
+              <img src="assets/svg/arrow-right.svg" alt="newMonth">
+            </button>    
+          </div>     
+        </div>
+      </div>
+      <div class="simulation-form__monthly">
+        <div class="monthly-amount">
+          <h4>Monthly amount</h4>
+          <p>${{ monthlyAmount | number: '1.0-2' }}</p>
+        </div>
+        <div class="monthly-detail">
+          <p>
+            You're planning <b>{{ totalMonths }} monthly deposits</b> to reach your <b>${{ amount || '0' }}</b> goal by 
+            <b>{{ getMonthName(reachDate.getMonth()) }} {{ reachDate.getFullYear() }}.</b>
+          </p>
+        </div>
+      </div>
+      <button class="simulation-form__button" type="submit" [disabled]="!amount || amount === '0'">
+        Confirm
+      </button>
+    </div>
+  </form>
+</div>

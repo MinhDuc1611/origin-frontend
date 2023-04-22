@@ -1,0 +1,19 @@
+
+header {
+  position: fixed;
+  height: 80px;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  background: #FFFFFF;
+  padding: 0 50px;
+  display: flex;
+  align-items: center;
+  @media (max-width: 600px) {
+    height: 56px;
+    padding: 0 16px;
+    img {
+      width: 75px;
+    }
+  }
+}
